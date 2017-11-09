@@ -27,4 +27,8 @@ public class CoinMachineTest {
         assertTrue(coinMachine.insert(Coin.QUARTER));
     }
 
+    @Test
+    public void itDoesNotAcceptInvalidCoins(){
+        assertFalse(coinMachine.insert(Coin.PENNY));
+    }
 }

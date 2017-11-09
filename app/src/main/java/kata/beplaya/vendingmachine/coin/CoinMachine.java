@@ -6,7 +6,7 @@ public class CoinMachine {
     }
 
     public enum Coin{
-        NICKEL, QUARTER, DIME, Coin
+        NICKEL, QUARTER, DIME, PENNY, Coin
     }
 
     public float getCurrentAmount() {
