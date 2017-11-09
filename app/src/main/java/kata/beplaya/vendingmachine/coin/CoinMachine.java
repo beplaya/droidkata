@@ -1,19 +1,31 @@
 package kata.beplaya.vendingmachine.coin;
 
 public class CoinMachine {
+
+    private float currentAmount = 0f;
+
+    public enum Coin{
+        NICKEL(5), QUARTER(25), DIME(10), PENNY(1), UNRECOGNIZED(0);
+        private float value;
+
+        Coin(float value){
+            this.value = value;
+        }
+    }
+
     public boolean insert(Coin coin) {
-        return isValid(coin);
+        boolean isValid = isValid(coin);
+        if(isValid){
+            currentAmount += coin.value;
+        }
+        return isValid;
     }
 
     private boolean isValid(Coin coin) {
         return coin.equals(Coin.QUARTER) ||  coin.equals(Coin.DIME) ||  coin.equals(Coin.NICKEL);
     }
 
-    public enum Coin{
-        NICKEL, QUARTER, DIME, PENNY, UNRECOGNIZED, Coin
-    }
-
     public float getCurrentAmount() {
-        return 0f;
+        return currentAmount;
     }
 }

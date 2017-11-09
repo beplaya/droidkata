@@ -24,12 +24,21 @@ public class CoinMachineTest {
     public void itCanAcceptValidCoins(){
         assertTrue(coinMachine.insert(Coin.NICKEL));
         assertTrue(coinMachine.insert(Coin.DIME));
-        assertTrue(coinMachine.insert(Coin.QUARTER));
+        assertTrue(coinMachine.insert(Coin.QUARTER));s
     }
 
     @Test
     public void itDoesNotAcceptInvalidCoins(){
         assertFalse(coinMachine.insert(Coin.PENNY));
         assertFalse(coinMachine.insert(Coin.UNRECOGNIZED));
+    }
+
+    @Test
+    public void itCalculatesAmountInserted(){
+        coinMachine.insert(Coin.QUARTER);
+        coinMachine.insert(Coin.QUARTER);
+        coinMachine.insert(Coin.DIME);
+        coinMachine.insert(Coin.NICKEL);
+        assertEquals(65f, coinMachine.getCurrentAmount(), 0f);
     }
 }
