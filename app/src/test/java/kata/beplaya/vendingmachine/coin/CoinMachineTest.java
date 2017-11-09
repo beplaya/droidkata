@@ -3,7 +3,6 @@ package kata.beplaya.vendingmachine.coin;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
@@ -16,12 +15,12 @@ public class CoinMachineTest {
     private CoinMachine coinMachine;
 
     @Mock
-    private ReturnTray returnTray;
+    private ReturnTray mockReturnTray;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        coinMachine = new CoinMachine(returnTray);
+        coinMachine = new CoinMachine(mockReturnTray);
     }
 
     @Test
@@ -60,7 +59,7 @@ public class CoinMachineTest {
         coinMachine.insert(Coin.DIME);
         coinMachine.insert(Coin.NICKEL);
         coinMachine.insert(Coin.PENNY);
-        verify(returnTray, times(2)).onReturn(Coin.PENNY);
-        verify(returnTray, times(1)).onReturn(Coin.UNRECOGNIZED);
+        verify(mockReturnTray, times(2)).onReturn(Coin.PENNY);
+        verify(mockReturnTray, times(1)).onReturn(Coin.UNRECOGNIZED);
     }
 }
