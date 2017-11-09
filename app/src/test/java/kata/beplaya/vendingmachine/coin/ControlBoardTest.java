@@ -28,13 +28,13 @@ public class ControlBoardTest {
     }
 
     @Test
-    public void itRefectsCorrectStateAfterInsert_ValidCoin(){
+    public void itReflectsCorrectStateAfterInsert_ValidCoin(){
         coinMachine.insert(CoinMachine.Coin.DIME);
         assertEquals(VendState.COINS_INSERTED, controlBoard.determineVendState());
     }
 
     @Test
-    public void itRefectsCorrectStateAfterInsert_InvalidCoin(){
+    public void itReflectsCorrectStateAfterInsert_InvalidCoin(){
         coinMachine.insert(CoinMachine.Coin.DIME);
         assertEquals(VendState.COINS_INSERTED, controlBoard.determineVendState());
     }
