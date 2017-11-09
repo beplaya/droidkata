@@ -16,8 +16,8 @@ public class VendingController {
     private ControlBoard controlBoard;
     private VendingView vendingView;
 
-    public VendingController(CoinMachine coinMachine, VendingView vendingView){
-        controlBoard = new ControlBoard(coinMachine);
+    public VendingController(ControlBoard controlBoard, VendingView vendingView){
+        this.controlBoard = controlBoard;
         this.vendingView = vendingView;
         insertCoinListenerMap = new HashMap<>();
         Coin[] coins = Coin.values();

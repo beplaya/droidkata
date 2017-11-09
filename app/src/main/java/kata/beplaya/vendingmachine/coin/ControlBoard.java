@@ -12,8 +12,8 @@ public class ControlBoard {
         this.coinMachine = coinMachine;
     }
 
-    public float getCurrentAmountAccepted() {
-        return 0f;
+    public int getCurrentAmountAccepted() {
+        return coinMachine.getCurrentAmount();
     }
 
     public VendState determineVendState() {

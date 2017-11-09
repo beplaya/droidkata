@@ -2,7 +2,7 @@ package kata.beplaya.vendingmachine.coin;
 
 public class CoinMachine {
 
-    private float currentAmount = 0f;
+    private int currentAmount = 0;
     private ReturnTray returnTray;
 
     public CoinMachine(ReturnTray returnTray) {
@@ -32,7 +32,7 @@ public class CoinMachine {
         return coin.equals(Coin.QUARTER) ||  coin.equals(Coin.DIME) ||  coin.equals(Coin.NICKEL);
     }
 
-    public float getCurrentAmount() {
+    public int getCurrentAmount() {
         return currentAmount;
     }
 }
