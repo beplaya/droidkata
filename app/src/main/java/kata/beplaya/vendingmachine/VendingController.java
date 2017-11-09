@@ -25,6 +25,7 @@ public class VendingController {
         for (Coin coin: coins) {
             insertCoinListenerMap.put(coin, new InsertCoinListener(coin));
         }
+        this.vendingView.init(this);
     }
 
     public InsertCoinListener getInsertClickHandler(Coin coin) {

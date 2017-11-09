@@ -5,7 +5,6 @@ import android.view.View;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import kata.beplaya.vendingmachine.coin.CoinMachine;
@@ -35,5 +34,10 @@ public class VendingControllerTest {
         vendingController.getInsertClickHandler(CoinMachine.Coin.QUARTER).onClick(mockView);
         verify(mockCoinMachine).getCurrentAmount();
         verify(mockVendingView).updateVendStatus(vendingController.getControlBoard().determineVendState(), vendingController.getControlBoard().getCurrentAmountAccepted());
+    }
+
+    @Test
+    public void itInitializesTheView(){
+        verify(mockVendingView).init(vendingController);
     }
 }

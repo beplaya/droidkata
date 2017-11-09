@@ -7,19 +7,20 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
+import kata.beplaya.vendingmachine.R;
 import kata.beplaya.vendingmachine.VendingController;
 
 import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
 
 public class VendingView {
 
-    public static final int ID_QUARTER = 0;
-    public static final int ID_DIME = 1;
-    public static final int ID_NICKEL = 2;
-    public static final int ID_PENNY = 3;
-    public static final int ID_OTHER = 4;
-    public static final int ID_STATUS_DISPLAY = 5;
-    public static final int ID_INSERT_COIN_STR = 323123;
+    public static final int ID_QUARTER = R.id.btn_insert_quarter;
+    public static final int ID_DIME = R.id.btn_insert_dime;
+    public static final int ID_NICKEL = R.id.btn_insert_nickel;
+    public static final int ID_PENNY = R.id.btn_insert_penny;
+    public static final int ID_OTHER =  R.id.btn_insert_other;
+    public static final int ID_STATUS_DISPLAY = R.id.tv_status;
+    public static final int ID_INSERT_COIN_STR = R.string.status_insert_coin;
 
     Map<Coin, Integer> insertCoinResourceIds;
     Map<Coin, Button> insertButtons;
@@ -50,6 +51,7 @@ public class VendingView {
         Coin[] coins = Coin.values();
         for (Coin coin : coins) {
             insertButtons.put(coin, (Button) activity.findViewById(insertCoinResourceIds.get(coin)));
+            insertButtons.get(coin).setText(coin.name());
         }
         statusDisplay = activity.findViewById(ID_STATUS_DISPLAY);
     }

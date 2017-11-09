@@ -33,20 +33,27 @@ public class VendingViewTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        vendingController = new VendingController(mockCoinMachine, vendingView);
         vendingView = new VendingView(mockActivity);
 
         mockInsertButtons = new HashMap<>();
         CoinMachine.Coin[] coins = CoinMachine.Coin.values();
         for (CoinMachine.Coin coin : coins) {
-            mockInsertButtons.put(coin, Mockito.mock(Button.class));
+            mockInsertButtons.put(coin, mock(Button.class));
             when(mockActivity.findViewById(vendingView.insertCoinResourceIds.get(coin))).thenReturn(mockInsertButtons.get(coin));
         }
 
         when(mockActivity.findViewById(VendingView.ID_STATUS_DISPLAY)).thenReturn(mockStatusDisplay);
         when(mockActivity.getString(VendingView.ID_INSERT_COIN_STR)).thenReturn("INSERT COIN");
 
-        vendingView.init(vendingController);
+        vendingController = new VendingController(mockCoinMachine, vendingView);
+    }
+
+    @Test
+    public void itSetsTheTextOfTheInsertButtons() {
+        CoinMachine.Coin[] coins = CoinMachine.Coin.values();
+        for (CoinMachine.Coin coin : coins) {
+            verify(mockInsertButtons.get(coin)).setText(coin.name());
+        }
     }
 
     @Test
@@ -73,6 +80,12 @@ public class VendingViewTest {
     @Test
     public void itUpdatesTheStatusDisplayForDefaultState() {
         vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 0f);
+        verify(mockStatusDisplay).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
+    }
+
+    @Test
+    public void itUpdatesTheStatusDisplayBasedOnVendState() {
+        vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 185.25f);
         verify(mockStatusDisplay).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
     }
 
