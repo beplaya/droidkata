@@ -30,5 +30,6 @@ public class CoinMachineTest {
     @Test
     public void itDoesNotAcceptInvalidCoins(){
         assertFalse(coinMachine.insert(Coin.PENNY));
+        assertFalse(coinMachine.insert(Coin.UNRECOGNIZED));
     }
 }
