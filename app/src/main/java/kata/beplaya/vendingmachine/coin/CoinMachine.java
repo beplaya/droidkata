@@ -10,7 +10,7 @@ public class CoinMachine {
     }
 
     public enum Coin{
-        NICKEL(5), QUARTER(25), DIME(10), PENNY(1), UNRECOGNIZED(0);
+        NICKEL(5), QUARTER(25), DIME(10), PENNY(1), OTHER(0);
         private float value;
 
         Coin(float value){

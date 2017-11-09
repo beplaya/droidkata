@@ -38,7 +38,7 @@ public class CoinMachineTest {
     @Test
     public void itDoesNotAcceptInvalidCoins(){
         assertFalse(coinMachine.insert(Coin.PENNY));
-        assertFalse(coinMachine.insert(Coin.UNRECOGNIZED));
+        assertFalse(coinMachine.insert(Coin.OTHER));
     }
 
     @Test
@@ -55,11 +55,11 @@ public class CoinMachineTest {
         coinMachine.insert(Coin.PENNY);
         coinMachine.insert(Coin.QUARTER);
         coinMachine.insert(Coin.QUARTER);
-        coinMachine.insert(Coin.UNRECOGNIZED);
+        coinMachine.insert(Coin.OTHER);
         coinMachine.insert(Coin.DIME);
         coinMachine.insert(Coin.NICKEL);
         coinMachine.insert(Coin.PENNY);
         verify(mockReturnTray, times(2)).onReturn(Coin.PENNY);
-        verify(mockReturnTray, times(1)).onReturn(Coin.UNRECOGNIZED);
+        verify(mockReturnTray, times(1)).onReturn(Coin.OTHER);
     }
 }
