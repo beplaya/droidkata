@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import kata.beplaya.vendingmachine.R;
-import kata.beplaya.vendingmachine.VendingController;
 import kata.beplaya.vendingmachine.coin.ControlBoard;
 
 import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
@@ -19,7 +18,7 @@ public class VendingView {
     public static final int ID_DIME = R.id.btn_insert_dime;
     public static final int ID_NICKEL = R.id.btn_insert_nickel;
     public static final int ID_PENNY = R.id.btn_insert_penny;
-    public static final int ID_OTHER =  R.id.btn_insert_other;
+    public static final int ID_OTHER = R.id.btn_insert_other;
     public static final int ID_STATUS_DISPLAY = R.id.tv_status;
     public static final int ID_INSERT_COIN_STR = R.string.status_insert_coin;
 
@@ -64,8 +63,8 @@ public class VendingView {
         }
     }
 
-    public void updateVendStatus(ControlBoard.VendState vendState, float currentAmountAccepted) {
-        if(vendState.equals(ControlBoard.VendState.INSERT_COIN)){
+    public void updateVendStatus(ControlBoard.VendState vendState, int currentAmountAccepted) {
+        if (vendState.equals(ControlBoard.VendState.INSERT_COIN)) {
             statusDisplay.setText(activity.getString(ID_INSERT_COIN_STR));
         } else {
             statusDisplay.setText(formatAmount(currentAmountAccepted));
@@ -73,6 +72,7 @@ public class VendingView {
     }
 
     private String formatAmount(float amount) {
-        return "$" + amount;
+        double usd = amount / 100d;
+        return NumberFormat.getCurrencyInstance().format(usd);
     }
 }

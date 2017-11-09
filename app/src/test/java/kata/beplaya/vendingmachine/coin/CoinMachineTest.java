@@ -24,34 +24,34 @@ public class CoinMachineTest {
     }
 
     @Test
-    public void itDefaultsCurrentAmountToZero(){
-        assertEquals(0f, coinMachine.getCurrentAmount(), 0f);
+    public void itDefaultsCurrentAmountToZero() {
+        assertEquals(0, coinMachine.getCurrentAmount());
     }
 
     @Test
-    public void itCanAcceptValidCoins(){
+    public void itCanAcceptValidCoins() {
         assertTrue(coinMachine.insert(Coin.NICKEL));
         assertTrue(coinMachine.insert(Coin.DIME));
         assertTrue(coinMachine.insert(Coin.QUARTER));
     }
 
     @Test
-    public void itDoesNotAcceptInvalidCoins(){
+    public void itDoesNotAcceptInvalidCoins() {
         assertFalse(coinMachine.insert(Coin.PENNY));
         assertFalse(coinMachine.insert(Coin.OTHER));
     }
 
     @Test
-    public void itCalculatesAmountInserted(){
+    public void itCalculatesAmountInserted() {
         coinMachine.insert(Coin.QUARTER);
         coinMachine.insert(Coin.QUARTER);
         coinMachine.insert(Coin.DIME);
         coinMachine.insert(Coin.NICKEL);
-        assertEquals(65f, coinMachine.getCurrentAmount(), 0f);
+        assertEquals(65, coinMachine.getCurrentAmount());
     }
 
     @Test
-    public void itHasTheCorrectRejectedCoinsInReturn(){
+    public void itHasTheCorrectRejectedCoinsInReturn() {
         coinMachine.insert(Coin.PENNY);
         coinMachine.insert(Coin.QUARTER);
         coinMachine.insert(Coin.QUARTER);

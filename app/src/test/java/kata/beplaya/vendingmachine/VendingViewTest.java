@@ -11,9 +11,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import kata.beplaya.vendingmachine.VendingController;
-import kata.beplaya.vendingmachine.VendingView;
 import kata.beplaya.vendingmachine.coin.CoinMachine;
 import kata.beplaya.vendingmachine.coin.ControlBoard;
 
@@ -47,7 +44,7 @@ public class VendingViewTest {
         when(mockActivity.findViewById(VendingView.ID_STATUS_DISPLAY)).thenReturn(mockStatusDisplay);
         when(mockActivity.getString(VendingView.ID_INSERT_COIN_STR)).thenReturn("INSERT COIN");
 
-        vendingController = new VendingController(mockCoinMachine, vendingView);
+        vendingController = new VendingController(new ControlBoard(mockCoinMachine), vendingView);
     }
 
     @Test
@@ -81,21 +78,25 @@ public class VendingViewTest {
 
     @Test
     public void itUpdatesTheStatusDisplayForNoCoins() {
-        vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 0f);
+        vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 0);
         verify(mockStatusDisplay, times(2)).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
     }
 
     @Test
     public void itUpdatesTheStatusDisplayBasedOnVendState() {
-        vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 185.25f);
+        vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 185);
         verify(mockStatusDisplay, times(2)).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
     }
 
     @Test
     public void itUpdatesTheStatusDisplayWhenCoinsAreInserted() {
-        vendingView.updateVendStatus(ControlBoard.VendState.COINS_INSERTED, 0.25f);
+        vendingView.updateVendStatus(ControlBoard.VendState.COINS_INSERTED, 25);
         verify(mockStatusDisplay).setText("$0.25");
     }
 
-
+    @Test
+    public void itFormatsAmountCorrectly() {
+        vendingView.updateVendStatus(ControlBoard.VendState.COINS_INSERTED, 5);
+        verify(mockStatusDisplay).setText("$0.05");
+    }
 }
