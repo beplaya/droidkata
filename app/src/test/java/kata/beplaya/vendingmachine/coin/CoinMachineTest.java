@@ -3,6 +3,7 @@ package kata.beplaya.vendingmachine.coin;
 import org.junit.Before;
 import org.junit.Test;
 
+import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
 import static org.junit.Assert.*;
 
 public class CoinMachineTest {
@@ -17,6 +18,13 @@ public class CoinMachineTest {
     @Test
     public void itDefaultsCurrentAmountToZero(){
         assertEquals(0f, coinMachine.getCurrentAmount(), 0f);
+    }
+
+    @Test
+    public void itCanAcceptValidCoins(){
+        assertTrue(coinMachine.insert(Coin.NICKEL));
+        assertTrue(coinMachine.insert(Coin.DIME));
+        assertTrue(coinMachine.insert(Coin.QUARTER));
     }
 
 }
