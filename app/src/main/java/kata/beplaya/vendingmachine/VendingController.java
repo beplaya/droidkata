@@ -7,7 +7,6 @@ import java.util.Map;
 
 import kata.beplaya.vendingmachine.coin.CoinMachine;
 import kata.beplaya.vendingmachine.coin.ControlBoard;
-import kata.beplaya.vendingmachine.coin.VendingView;
 
 import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
 
@@ -26,6 +25,7 @@ public class VendingController {
             insertCoinListenerMap.put(coin, new InsertCoinListener(coin));
         }
         this.vendingView.init(this);
+        this.vendingView.updateVendStatus(getControlBoard().determineVendState(), getControlBoard().getCurrentAmountAccepted());
     }
 
     public InsertCoinListener getInsertClickHandler(Coin coin) {

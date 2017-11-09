@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import kata.beplaya.vendingmachine.coin.CoinMachine;
-import kata.beplaya.vendingmachine.coin.VendingView;
 
 import static org.mockito.Mockito.*;
 
@@ -30,10 +29,15 @@ public class VendingControllerTest {
     }
 
     @Test
+    public void itUpdatesVendStatusOnInit(){
+        verify(mockVendingView).updateVendStatus(vendingController.getControlBoard().determineVendState(), vendingController.getControlBoard().getCurrentAmountAccepted());
+    }
+
+    @Test
     public void itUpdatesVendStatusOnInsertEvents(){
         vendingController.getInsertClickHandler(CoinMachine.Coin.QUARTER).onClick(mockView);
-        verify(mockCoinMachine).getCurrentAmount();
-        verify(mockVendingView).updateVendStatus(vendingController.getControlBoard().determineVendState(), vendingController.getControlBoard().getCurrentAmountAccepted());
+        verify(mockCoinMachine, times(2)).getCurrentAmount();
+        verify(mockVendingView, times(2)).updateVendStatus(vendingController.getControlBoard().determineVendState(), vendingController.getControlBoard().getCurrentAmountAccepted());
     }
 
     @Test
