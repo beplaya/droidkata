@@ -2,6 +2,7 @@ package kata.beplaya.vendingmachine.coin;
 
 import android.app.Activity;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,16 +18,17 @@ public class VendingView {
     public static final int ID_NICKEL = 2;
     public static final int ID_PENNY = 3;
     public static final int ID_OTHER = 4;
+    public static final int ID_STATUS_DISPLAY = 5;
 
     Map<Coin, Integer> insertCoinResourceIds;
     Map<Coin, Button> insertButtons;
+    TextView statusDisplay;
 
     private Activity activity;
     private VendingController vendingController;
 
-    public VendingView(Activity activity, VendingController vendingController) {
+    public VendingView(Activity activity) {
         this.activity = activity;
-        this.vendingController = vendingController;
         insertCoinResourceIds = new HashMap<>();
         insertCoinResourceIds.put(Coin.QUARTER, ID_QUARTER);
         insertCoinResourceIds.put(Coin.DIME, ID_DIME);
@@ -36,7 +38,8 @@ public class VendingView {
         insertButtons = new HashMap<>();
     }
 
-    public void init() {
+    public void init(VendingController vendingController) {
+        this.vendingController = vendingController;
         findViews();
         bindViews();
     }
@@ -47,6 +50,7 @@ public class VendingView {
         for (Coin coin : coins) {
             insertButtons.put(coin, (Button) activity.findViewById(insertCoinResourceIds.get(coin)));
         }
+        statusDisplay = activity.findViewById(ID_STATUS_DISPLAY);
     }
 
     private void bindViews() {
@@ -56,4 +60,6 @@ public class VendingView {
         }
     }
 
+    public void updateVendStatus(ControlBoard.VendState vendState, float currentAmountAccepted) {
+    }
 }
