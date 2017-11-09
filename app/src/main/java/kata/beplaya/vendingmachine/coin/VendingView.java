@@ -19,6 +19,7 @@ public class VendingView {
     public static final int ID_PENNY = 3;
     public static final int ID_OTHER = 4;
     public static final int ID_STATUS_DISPLAY = 5;
+    public static final int ID_INSERT_COIN_STR = 323123;
 
     Map<Coin, Integer> insertCoinResourceIds;
     Map<Coin, Button> insertButtons;
@@ -61,5 +62,14 @@ public class VendingView {
     }
 
     public void updateVendStatus(ControlBoard.VendState vendState, float currentAmountAccepted) {
+        if(vendState.equals(ControlBoard.VendState.INSERT_COIN)){
+            statusDisplay.setText(activity.getString(ID_INSERT_COIN_STR));
+        } else {
+            statusDisplay.setText(formatAmount(currentAmountAccepted));
+        }
+    }
+
+    private String formatAmount(float amount) {
+        return "$" + amount;
     }
 }

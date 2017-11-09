@@ -44,6 +44,7 @@ public class VendingViewTest {
         }
 
         when(mockActivity.findViewById(VendingView.ID_STATUS_DISPLAY)).thenReturn(mockStatusDisplay);
+        when(mockActivity.getString(VendingView.ID_INSERT_COIN_STR)).thenReturn("INSERT COIN");
 
         vendingView.init(vendingController);
     }
@@ -65,8 +66,21 @@ public class VendingViewTest {
     }
 
     @Test
-    public void itFindsTheStatusDisplay(){
+    public void itFindsTheStatusDisplay() {
         assertEquals(mockStatusDisplay, vendingView.statusDisplay);
     }
+
+    @Test
+    public void itUpdatesTheStatusDisplayForDefaultState() {
+        vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 0f);
+        verify(mockStatusDisplay).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
+    }
+
+    @Test
+    public void itUpdatesTheStatusDisplayWhenCoinsAreInserted() {
+        vendingView.updateVendStatus(ControlBoard.VendState.COINS_INSERTED, 0.25f);
+        verify(mockStatusDisplay).setText("$0.25");
+    }
+
 
 }
