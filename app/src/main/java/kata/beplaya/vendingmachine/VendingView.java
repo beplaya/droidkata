@@ -1,4 +1,4 @@
-package kata.beplaya.vendingmachine.coin;
+package kata.beplaya.vendingmachine;
 
 import android.app.Activity;
 import android.widget.Button;
@@ -9,6 +9,7 @@ import java.util.Map;
 
 import kata.beplaya.vendingmachine.R;
 import kata.beplaya.vendingmachine.VendingController;
+import kata.beplaya.vendingmachine.coin.ControlBoard;
 
 import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
 

@@ -1,4 +1,4 @@
-package kata.beplaya.vendingmachine.coin;
+package kata.beplaya.vendingmachine;
 
 import android.app.Activity;
 import android.widget.Button;
@@ -7,13 +7,15 @@ import android.widget.TextView;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import kata.beplaya.vendingmachine.VendingController;
+import kata.beplaya.vendingmachine.VendingView;
+import kata.beplaya.vendingmachine.coin.CoinMachine;
+import kata.beplaya.vendingmachine.coin.ControlBoard;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -78,15 +80,15 @@ public class VendingViewTest {
     }
 
     @Test
-    public void itUpdatesTheStatusDisplayForDefaultState() {
+    public void itUpdatesTheStatusDisplayForNoCoins() {
         vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 0f);
-        verify(mockStatusDisplay).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
+        verify(mockStatusDisplay, times(2)).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
     }
 
     @Test
     public void itUpdatesTheStatusDisplayBasedOnVendState() {
         vendingView.updateVendStatus(ControlBoard.VendState.INSERT_COIN, 185.25f);
-        verify(mockStatusDisplay).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
+        verify(mockStatusDisplay, times(2)).setText(mockActivity.getString(VendingView.ID_INSERT_COIN_STR));
     }
 
     @Test

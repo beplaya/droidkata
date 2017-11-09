@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import kata.beplaya.vendingmachine.coin.CoinMachine;
 import kata.beplaya.vendingmachine.coin.ReturnTray;
-import kata.beplaya.vendingmachine.coin.VendingView;
 
 public class VendingActivity extends AppCompatActivity {
 
