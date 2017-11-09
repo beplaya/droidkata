@@ -3,6 +3,11 @@ package kata.beplaya.vendingmachine.coin;
 public class CoinMachine {
 
     private float currentAmount = 0f;
+    private ReturnTray returnTray;
+
+    public CoinMachine(ReturnTray returnTray) {
+        this.returnTray = returnTray;
+    }
 
     public enum Coin{
         NICKEL(5), QUARTER(25), DIME(10), PENNY(1), UNRECOGNIZED(0);
@@ -17,6 +22,8 @@ public class CoinMachine {
         boolean isValid = isValid(coin);
         if(isValid){
             currentAmount += coin.value;
+        } else{
+            returnTray.onReturn(coin);
         }
         return isValid;
     }

@@ -21,7 +21,7 @@ public class CoinMachineTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        coinMachine = new CoinMachine();
+        coinMachine = new CoinMachine(returnTray);
     }
 
     @Test
@@ -61,7 +61,6 @@ public class CoinMachineTest {
         coinMachine.insert(Coin.NICKEL);
         coinMachine.insert(Coin.PENNY);
         verify(returnTray, times(2)).onReturn(Coin.PENNY);
-        verify(returnTray, times(2)).onReturn(Coin.UNRECOGNIZED);
-
+        verify(returnTray, times(1)).onReturn(Coin.UNRECOGNIZED);
     }
 }
