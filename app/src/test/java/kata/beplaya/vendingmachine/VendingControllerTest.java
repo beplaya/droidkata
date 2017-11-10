@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 import kata.beplaya.vendingmachine.coin.CoinMachine;
 import kata.beplaya.vendingmachine.coin.ControlBoard;
 import kata.beplaya.vendingmachine.coin.ReturnTray;
+import kata.beplaya.vendingmachine.store.Catalogue;
 
 import static org.mockito.Mockito.*;
 
@@ -27,7 +28,7 @@ public class VendingControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         controlBoard = new ControlBoard(new CoinMachine(new ReturnTray()));
-        vendingController = new VendingController(controlBoard, mockVendingView);
+        vendingController = new VendingController(controlBoard, mockVendingView, new Catalogue());
     }
 
     @Test

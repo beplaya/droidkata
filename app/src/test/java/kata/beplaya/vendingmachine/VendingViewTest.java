@@ -2,6 +2,7 @@ package kata.beplaya.vendingmachine;
 
 import android.app.Activity;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.junit.Before;
@@ -11,12 +12,10 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import kata.beplaya.vendingmachine.coin.CoinMachine;
 import kata.beplaya.vendingmachine.coin.ControlBoard;
 import kata.beplaya.vendingmachine.store.Catalogue;
-import kata.beplaya.vendingmachine.store.Product;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -26,7 +25,6 @@ public class VendingViewTest {
     private VendingView vendingView;
     private VendingController vendingController;
     private Map<CoinMachine.Coin, Button> mockInsertButtons;
-    private Map<String, Button> mockProductButtons;
     private Catalogue catalogue;
     @Mock
     private Activity mockActivity;
@@ -34,6 +32,8 @@ public class VendingViewTest {
     private TextView mockStatusDisplay;
     @Mock
     private CoinMachine mockCoinMachine;
+    @Mock
+    private ListView mockProductListView;
 
     @Before
     public void setUp() throws Exception {
@@ -45,8 +45,9 @@ public class VendingViewTest {
 
         when(mockActivity.findViewById(VendingView.ID_STATUS_DISPLAY)).thenReturn(mockStatusDisplay);
         when(mockActivity.getString(VendingView.ID_INSERT_COIN_STR)).thenReturn("INSERT COIN");
+        when(mockActivity.findViewById(VendingView.ID_PRODUCT_LIST_VIEW)).thenReturn(mockProductListView);
 
-        vendingController = new VendingController(new ControlBoard(mockCoinMachine), vendingView);
+        vendingController = new VendingController(new ControlBoard(mockCoinMachine), vendingView, new Catalogue());
     }
 
     private void setupMockButtons() {
@@ -55,11 +56,6 @@ public class VendingViewTest {
         for (CoinMachine.Coin coin : coins) {
             mockInsertButtons.put(coin, mock(Button.class));
             when(mockActivity.findViewById(vendingView.insertCoinResourceIds.get(coin))).thenReturn(mockInsertButtons.get(coin));
-        }
-        mockProductButtons = new HashMap<>();
-        Product[] products = catalogue.getAvailableProducts();
-        for (Product product : products) {
-            mockProductButtons.put(product.getID(), mock(Button.class));
         }
     }
 
@@ -72,19 +68,13 @@ public class VendingViewTest {
     }
 
     @Test
-    public void itFindsTheProductButtons() {
-        Product[] products = catalogue.getAvailableProducts();
-        for (Product product : products) {
-            assertEquals(mockProductButtons.get(product.getID()), vendingView.productButtons.get(product.getID()));
-        }
+    public void itFindsTheProductListView() {
+        assertEquals(mockProductListView, vendingView.productListView);
     }
 
     @Test
-    public void itBindsTheProductButtons() {
-        Product[] products = catalogue.getAvailableProducts();
-        for (Product product : products) {
-            verify(mockProductButtons.get(product.getID())).setOnClickListener(vendingController.getProductClickHandler(product.getID()));
-        }
+    public void itBindsTheProductListView() {
+        verify(mockProductListView).setOnItemClickListener(vendingController.getProductClickHandler());
     }
 
     @Test

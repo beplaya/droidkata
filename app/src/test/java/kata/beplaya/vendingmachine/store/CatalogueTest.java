@@ -16,9 +16,9 @@ public class CatalogueTest {
             Exception {
         catalogue = new Catalogue();
         expectedProducts = new Product[3];
-        expectedProducts[0] = new Product("1", "cola", 100);
-        expectedProducts[1] = new Product("2", "chips", 50);
-        expectedProducts[2] = new Product("3", "candy", 65);
+        expectedProducts[0] = new Product("0", "cola", 100);
+        expectedProducts[1] = new Product("1", "chips", 50);
+        expectedProducts[2] = new Product("2", "candy", 65);
     }
 
     @Test

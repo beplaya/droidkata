@@ -2,6 +2,7 @@ package kata.beplaya.vendingmachine;
 
 import android.app.Activity;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kata.beplaya.vendingmachine.coin.ControlBoard;
+import kata.beplaya.vendingmachine.store.Product;
 
 import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
 
@@ -21,10 +23,12 @@ public class VendingView {
     public static final int ID_OTHER = R.id.btn_insert_other;
     public static final int ID_STATUS_DISPLAY = R.id.tv_status;
     public static final int ID_INSERT_COIN_STR = R.string.status_insert_coin;
+    public static final int ID_PRODUCT_LIST_VIEW = R.id.lv_products;
 
     Map<Coin, Integer> insertCoinResourceIds;
     Map<Coin, Button> insertButtons;
     TextView statusDisplay;
+    ListView productListView;
 
     private Activity activity;
     private VendingController vendingController;
@@ -55,7 +59,11 @@ public class VendingView {
             insertButtons.put(coin, (Button) activity.findViewById(insertCoinResourceIds.get(coin)));
             insertButtons.get(coin).setText(coin.name());
         }
+        Product[] products = vendingController.getProducts();
+
         statusDisplay = activity.findViewById(ID_STATUS_DISPLAY);
+
+        productListView = activity.findViewById(ID_PRODUCT_LIST_VIEW);
     }
 
     private void bindViews() {
@@ -63,6 +71,8 @@ public class VendingView {
         for (Coin coin : coins) {
             insertButtons.get(coin).setOnClickListener(vendingController.getInsertClickHandler(coin));
         }
+
+        productListView.setOnItemClickListener(vendingController.getProductClickHandler());
     }
 
     public void updateVendStatus(ControlBoard.VendState vendState, int currentAmountAccepted) {
@@ -77,4 +87,5 @@ public class VendingView {
         double usd = amount / 100d;
         return NumberFormat.getCurrencyInstance().format(usd);
     }
+
 }
