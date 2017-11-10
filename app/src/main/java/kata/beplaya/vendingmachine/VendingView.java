@@ -28,6 +28,7 @@ public class VendingView {
 
     private Activity activity;
     private VendingController vendingController;
+    Map<String, Button> productButtons;
 
     public VendingView(Activity activity) {
         this.activity = activity;
@@ -38,6 +39,7 @@ public class VendingView {
         insertCoinResourceIds.put(Coin.PENNY, ID_PENNY);
         insertCoinResourceIds.put(Coin.OTHER, ID_OTHER);
         insertButtons = new HashMap<>();
+        productButtons = new HashMap<>();
     }
 
     public void init(VendingController vendingController) {

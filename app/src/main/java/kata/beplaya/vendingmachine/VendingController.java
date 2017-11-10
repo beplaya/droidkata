@@ -13,6 +13,7 @@ import static kata.beplaya.vendingmachine.coin.CoinMachine.*;
 public class VendingController {
 
     private Map<Coin, InsertCoinListener> insertCoinListenerMap;
+    private Map<Coin, ProductClickListener> productClickListenerMap;
     private ControlBoard controlBoard;
     private VendingView vendingView;
 
@@ -20,6 +21,7 @@ public class VendingController {
         this.controlBoard = controlBoard;
         this.vendingView = vendingView;
         insertCoinListenerMap = new HashMap<>();
+        productClickListenerMap = new HashMap<>();
         Coin[] coins = Coin.values();
         for (Coin coin: coins) {
             insertCoinListenerMap.put(coin, new InsertCoinListener(coin));
@@ -34,6 +36,24 @@ public class VendingController {
 
     public ControlBoard getControlBoard() {
         return controlBoard;
+    }
+
+    public View.OnClickListener getProductClickHandler(String productID) {
+        return null;
+    }
+
+    public class ProductClickListener implements View.OnClickListener {
+
+        private String id;
+
+        public ProductClickListener(String id){
+            this.id = id;
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 
     public class InsertCoinListener implements View.OnClickListener {
